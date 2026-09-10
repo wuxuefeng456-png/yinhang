@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="银行运维管理平台">
+    <title>BankOps 银行运维管理平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="loginView" class="login-page">
+    <div class="login-visual">
+        <div class="visual-grid"></div>
+        <div class="visual-content">
+            <div class="brand-lockup">
+                <span class="brand-mark">B</span>
+                <span>BankOps Nexus</span>
+            </div>
+            <div class="visual-copy">
+                <span class="eyebrow">BANKING OPERATIONS CENTER</span>
+                <h1>让每一次运维操作<br>安全、清晰、可追溯</h1>
+            </div>
+        </div>
+    </div>
+    <div class="login-panel">
+        <form id="loginForm" class="login-card">
+            <div class="mobile-brand"><span class="brand-mark">B</span> BankOps Nexus</div>
+            <span class="eyebrow dark">SECURE ACCESS</span>
+            <h2>登录运维控制台</h2>
+            <label class="field">
+                <span>账号</span>
+                <input id="loginUsername" name="username" autocomplete="username" maxlength="30" placeholder="4-20位账号" required>
+            </label>
+            <label class="field">
+                <span>密码</span>
+                <input id="loginPassword" name="password" type="password" autocomplete="current-password" maxlength="64" placeholder="请输入密码" required>
+            </label>
+            <div id="loginError" class="form-error" aria-live="polite"></div>
+            <button id="loginButton" class="primary-button login-button" type="submit">安全登录</button>
+            <div class="demo-accounts">
+                <div><span>管理员</span><code>bankadmin / Admin@123</code></div>
+                <div><span>普通成员</span><code>member01 / Member@123</code></div>
+                <div><span>架构评审专员</span><code>arch_review / Special@123</code></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-mark">B</span>
+            <div><strong>BankOps</strong></div>
+        </div>
+        <nav class="nav-menu" aria-label="主导航">
+            <button class="nav-item active" data-view="overview"><span class="nav-icon">⌂</span><span>运维总览</span></button>
+            <button class="nav-item member-only hidden" data-view="tasks"><span class="nav-icon">✓</span><span>我的待办</span></button>
+            <button class="nav-item admin-only" data-view="orders"><span class="nav-icon">▤</span><span>工单中心</span></button>
+            <button class="nav-item" data-view="assets"><span class="nav-icon">◇</span><span>资产台账</span></button>
+            <div class="nav-divider governance-section hidden"><span>综合管理</span></div>
+            <button class="nav-item governance-nav hidden" data-view="architecture" data-module="ARCHITECTURE"><span class="nav-icon">▦</span><span>架构管理</span></button>
+            <button class="nav-item governance-nav hidden" data-view="outsourcing" data-module="OUTSOURCING"><span class="nav-icon">♙</span><span>外包管理</span></button>
+            <button class="nav-item governance-nav hidden" data-view="projects" data-module="PROJECT"><span class="nav-icon">▣</span><span>项目管理</span></button>
+            <button class="nav-item governance-nav hidden" data-view="requirements" data-module="REQUIREMENT"><span class="nav-icon">≡</span><span>需求管理</span></button>
+            <button class="nav-item governance-nav hidden" data-view="changes" data-module="CHANGE_RELEASE"><span class="nav-icon">⇄</span><span>变更与发布</span></button>
+            <button class="nav-item governance-nav hidden" data-view="resources" data-module="ASSET_RESOURCE"><span class="nav-icon">▧</span><span>资产与资源</span></button>
+            <button class="nav-item governance-nav hidden" data-view="personnel" data-module="PERSONNEL"><span class="nav-icon">♟</span><span>人员与团队</span></button>
+            <button class="nav-item governance-nav hidden" data-view="documents" data-module="DOCUMENT"><span class="nav-icon">▱</span><span>制度与文档</span></button>
+            <button class="nav-item governance-nav hidden" data-view="risks" data-module="RISK_COMPLIANCE"><span class="nav-icon">△</span><span>风险与合规</span></button>
+            <div class="nav-divider admin-only"><span>安全管理</span></div>
+            <button class="nav-item admin-only" data-view="users"><span class="nav-icon">◎</span><span>账号管理</span></button>
+            <button class="nav-item admin-only" data-view="audits"><span class="nav-icon">◫</span><span>登录审计</span></button>
+        </nav>
+        <div class="sidebar-health">
+            <span class="pulse-dot"></span>
+            <div><strong>平台运行正常</strong></div>
+        </div>
+    </aside>
+
+    <div class="workspace">
+        <header class="topbar">
+            <button id="menuToggle" class="icon-button menu-toggle" aria-label="切换菜单">☰</button>
+            <div>
+                <p id="pageEyebrow" class="top-eyebrow">OPERATIONS OVERVIEW</p>
+                <h2 id="pageTitle">运维总览</h2>
+            </div>
+            <div class="top-actions">
+                <div class="system-clock"><span id="clockDate"></span><strong id="clockTime"></strong></div>
+                <div class="user-menu">
+                    <span id="userAvatar" class="avatar">管</span>
+                    <div><strong id="userDisplayName">系统管理员</strong><span id="userRole" class="user-role">管理员</span></div>
+                </div>
+                <button id="logoutButton" class="ghost-button">退出</button>
+            </div>
+        </header>
+        <main id="content" class="content" aria-live="polite"></main>
+    </div>
+</div>
+
+<div id="modalBackdrop" class="modal-backdrop hidden">
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+            <div><span class="eyebrow dark">BANKOPS FORM</span><h3 id="modalTitle">编辑</h3></div>
+            <button id="modalClose" class="icon-button" aria-label="关闭">×</button>
+        </div>
+        <form id="modalForm" class="modal-body"></form>
+    </section>
+</div>
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

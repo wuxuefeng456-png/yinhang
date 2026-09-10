@@ -1,0 +1,13 @@
+/target/
+/data/
+/.idea/
+/.vscode/
+*.iml
+*.log
+*.md
+database/mysql-init-local.sql
+maven-settings.xml
+.mvn/maven.config
+/.chrome-*-profile/
+/.chrome-profile/
+/.edge-profile/

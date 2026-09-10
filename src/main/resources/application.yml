@@ -1,0 +1,32 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+
+spring:
+  application:
+    name: bank-ops-platform
+  datasource:
+    url: ${BANKOPS_DB_URL:jdbc:mysql://localhost:3306/bank_ops?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&useSSL=false}
+    username: ${BANKOPS_DB_USERNAME:yinhang}
+    password: ${BANKOPS_DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+logging:
+  level:
+    org.hibernate.SQL: warn
+    com.bankops: info
+
+bankops:
+  auth:
+    session-hours: 8
+    max-failed-attempts: 5
